@@ -1,0 +1,162 @@
+<ion-header [translucent]="true">
+  <ion-toolbar >
+    <ion-buttons slot="start" *ngIf="folder !=''">
+      <ion-back-button ></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      {{this.folder||'Photo-App'}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-buttons slot="start" *ngIf="folder !=''">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-text color="medium" *ngIf="directories.length===0" class="ion-padding ion-text-center">
+    <p>Empty folder !</p>
+  </ion-text>
+
+
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let f of directories">
+    <ion-item (click)="itemClicked(f)">
+      <ion-icon name="document" slot="start" *ngIf="f.isFile"></ion-icon>
+      <ion-icon name="folder" slot="start" *ngIf="f.isDirectory"></ion-icon>
+
+      <ion-label text-wrap>
+          {{f.name}}
+          <p>{{f.nativeURL}}</p>
+      </ion-label>
+
+    </ion-item>
+    <ion-item-options side="start" *ngIf="f.isDirectory">
+        <ion-item-option (click)="deleteFile(f)" color="danger">
+          <ion-icon name="trash" slot="icon-only"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+ 
+      <ion-item-options side="end" *ngIf="f.isDirectory">
+        <ion-item-option  (click)="handle(f,'copyFolder')"  color="success">
+          Copy
+        </ion-item-option>
+        <ion-item-option *ngIf="this.folder!=''" (click)="handle(f,'moveFolder')" color="primary">
+          Move
+        </ion-item-option>
+      </ion-item-options>
+
+
+
+  </ion-item-sliding>
+
+ 
+
+  </ion-list>
+
+  <!-- <div id="container">
+    <strong>Ready to create an app?</strong>
+    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  </div> -->
+
+  <!-- <ion-content> -->
+
+    <ion-fab  vertical="bottom" horizontal="center" slot="fixed">
+    
+      <ion-fab-button *ngIf="this.folder!=''" (click)="createFile()">
+        <ion-icon name="camera" ></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+
+    <ion-fab-button (click)="handle()"  *ngIf="(this.photoService.myFileParam)&&(this.folder!='')">
+
+      <ion-icon name="copy"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-button (click)="pasteFolder()"  *ngIf="(this.photoService.myFolderParam)&&(this.photoService.mode=='copyFolder')&&(this.folder!='')">
+
+      <ion-icon name="copy"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-button (click)="moveFolder()"  *ngIf="(this.photoService.myFolderParam)&&(this.photoService.mode=='moveFolder')&&(this.folder!='')">
+
+      <ion-icon name="copy"></ion-icon>
+    </ion-fab-button>
+
+
+    <ion-fab-button (click)="CancelAll()" *ngIf="(this.photoService.myFileParam||this.photoService.myFolderParam)&&(this.folder!='')">
+
+      <ion-icon name="close" ></ion-icon>
+    </ion-fab-button>
+
+
+    <ion-fab-button  (click)="createFolder()" >
+
+      <ion-icon name="add" ></ion-icon>
+    </ion-fab-button>
+
+
+
+    
+
+    <!-- <ion-fab-list side="top">
+      <ion-fab-button (click)="createFolder()">
+
+        <ion-icon name="folder"></ion-icon>
+      </ion-fab-button>
+
+      <ion-fab-button >
+
+        <ion-icon name="camera" (click)="addPhotoToGallery()"></ion-icon>
+      </ion-fab-button>
+
+     
+
+    </ion-fab-list> -->
+
+
+  </ion-fab>
+
+  <ion-grid>
+    <ion-row>
+    <ion-col size="6" 
+      *ngFor="let photo of photoService.photos; index as position">
+        <ion-img [src]="photo.webviewPath"></ion-img>
+    </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!-- </ion-content> -->
+
+  <!-- <ion-content>
+    <ion-grid>
+      <ion-row>
+      <ion-col size="6" 
+        *ngFor="let photo of photoService.photos; index as position">
+          <ion-img [src]="photo.webviewPath"></ion-img>
+      </ion-col>
+      </ion-row>
+    </ion-grid> -->
+  
+    <!-- ion-fab markup  -->
+  <!-- </ion-content> -->
+
+
+  <!-- <ion-content>
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    
+        <ion-fab-button>
+          <ion-icon name="camera" (click)="addPhotoToGallery()"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    </ion-content> -->
+
+
+
+
+</ion-content>
