@@ -431,7 +431,6 @@ export class HomePage implements OnInit {
 
         this._file.moveDir(this.photoService.myFolderParam.path, this.photoService.myFolderParam.name, newPath, this.photoService.myFolderParam.name)
             .then((value) => {
-                alert(newPath)
                 this.loadDocs();
                 this.CancelAll();
             }).catch((err) => { })

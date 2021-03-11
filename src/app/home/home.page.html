@@ -79,7 +79,7 @@
       <ion-icon name="copy"></ion-icon>
     </ion-fab-button>
 
-    <ion-fab-button (click)="pasteFolder()"  *ngIf="(this.photoService.myFolderParam)&&(this.photoService.mode=='copyFolder')&&(this.folder!='')">
+    <ion-fab-button (click)="pasteFolder()"  *ngIf="(this.photoService.myFolderParam)&&(this.photoService.mode=='copyFolder')">
 
       <ion-icon name="copy"></ion-icon>
     </ion-fab-button>
@@ -90,7 +90,7 @@
     </ion-fab-button>
 
 
-    <ion-fab-button (click)="CancelAll()" *ngIf="(this.photoService.myFileParam||this.photoService.myFolderParam)&&(this.folder!='')">
+    <ion-fab-button (click)="CancelAll()" *ngIf="(this.photoService.myFileParam||this.photoService.myFolderParam)">
 
       <ion-icon name="close" ></ion-icon>
     </ion-fab-button>
